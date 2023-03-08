@@ -15,6 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import "./navbar.css";
+import { Link } from 'react-router-dom';
 
 
 
@@ -121,6 +122,7 @@ function Navbar(props) {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
+                            <Link to ="productos">
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
@@ -128,6 +130,7 @@ function Navbar(props) {
                             >
                                 {page}
                             </Button>
+                            </Link>
                             
                         ))}<IconButton sx={{ p: 0, marginRight: 3 }}>
                         <Badge badgeContent={props.item} color="error">

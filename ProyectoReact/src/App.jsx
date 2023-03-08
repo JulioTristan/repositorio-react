@@ -3,9 +3,20 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import Navbar from './components/navbar'
 import Greeting from './components/itemListContainer'
+import { Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import ProductList from './components/ProductList'
+import axios from 'axios'
 
 
 function App() {
+  const [productos, setProductos]= useState([])
+
+  const getProductos = async () => {
+     const res = await axios.get("https://fakestoreapi.com/products")
+     setProductos(res.data)
+  }
+
   const text = "de Nintendo"
 
   const [item, setItem] = useState(0)
@@ -21,10 +32,8 @@ function App() {
   const [usuario, setUsuario] = useState({})
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${item}`)
-      .then(response => response.json())
-      .then(json => setUsuario(json))
-  }, [item])
+    getProductos();
+  }, [])
 
   return (
 
@@ -41,6 +50,10 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/productos" element={<ProductList productos={productos}/>}/> 
+      </Routes>
       <div className="card">
         <div>
           <button onClick={resta}>-</button>
@@ -63,8 +76,3 @@ function App() {
 }
 
 export default App
-
-for (let index = 0; index < array.length; index++) {
-  const element = array[index];
-  
-}
